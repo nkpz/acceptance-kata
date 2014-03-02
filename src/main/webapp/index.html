@@ -1,0 +1,20 @@
+<html>
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-resource.js"></script>
+<script>
+  angular.module("homePage", [ 'ngResource' ]).
+  controller("rentalController", [ '$scope', '$resource', function(scope, resource) {
+        var rentalResource = resource("http://localhost:3000/rest/rentals");
+        scope.rentals = rentalResource.query();
+      }]);
+</script>
+</head>
+<body ng-app="homePage" ng-controller="rentalController">
+<h1>Widget Rental</h1>
+<ul id="rental_list" ng-repeat="rental in rentals">
+  <li>{{rental.name}}</li>
+</ul>
+</body>
+</html>
